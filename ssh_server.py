@@ -14,10 +14,12 @@ def log_event(message):
 
 
 class HoneyTrapServer(paramiko.ServerInterface):
+
+
     def check_auth_password(self, username, password):
 
+        self.username = username
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
         message = f"[{timestamp}] Login attempt — Username: {username}"
 
         print(message)
@@ -37,7 +39,9 @@ class HoneyTrapServer(paramiko.ServerInterface):
 
     def check_channel_shell_request(self, channel):
         return True
-
+    
+    def check_channel_pty_request(self, channel, term, width, height, pixelwidth, pixelheight, modes):
+        return True
 
 def handle_client(client_socket, client_address):
 
@@ -56,6 +60,12 @@ def handle_client(client_socket, client_address):
 
         if transport.is_authenticated():
             print(f"Authentication successful: {client_address[0]}")
+
+            channel = transport.accept(20)
+
+            if channel is not None:
+                 print("SSH session started!")
+
         else:
             print(f"Authentication failed or connection closed: {client_address[0]}")
 
