@@ -221,3 +221,29 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+# HoneyTrap specific files
+
+# Runtime logs
+*.log
+logs/
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Local configuration and secrets
+config.local.py
+
+# Private keys and certificates
+*.pem
+*.key
+id_rsa
+id_ed25519
+
+# SSH private keys
+*.ppk
+*.p12
+*.pfx
