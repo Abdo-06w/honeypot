@@ -247,3 +247,6 @@ id_ed25519
 *.ppk
 *.p12
 *.pfx
+
+honeytrap_host_key
+honeytrap_host_key.pub
